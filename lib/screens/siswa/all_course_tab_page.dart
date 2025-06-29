@@ -23,7 +23,7 @@ class _AllCourseTabState extends State<AllCourseTab>
   late Future<List<dynamic>> _coursesFuture;
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
-  
+
   final FocusNode _searchFocusNode = FocusNode();
 
   @override
@@ -86,7 +86,7 @@ class _AllCourseTabState extends State<AllCourseTab>
   void _showFilterBottomSheet() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -99,7 +99,9 @@ class _AllCourseTabState extends State<AllCourseTab>
             return Container(
               decoration: BoxDecoration(
                 color: colorScheme.surface,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
               ),
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -141,22 +143,16 @@ class _AllCourseTabState extends State<AllCourseTab>
                       _buildSortChip('Oldest', 'oldest', tempSortBy, (val) {
                         setModalState(() => tempSortBy = val);
                       }),
-                      _buildSortChip(
-                        'Low to High',
-                        'price_low',
-                        tempSortBy,
-                        (val) {
-                          setModalState(() => tempSortBy = val);
-                        },
-                      ),
-                      _buildSortChip(
-                        'High to Low',
-                        'price_high',
-                        tempSortBy,
-                        (val) {
-                          setModalState(() => tempSortBy = val);
-                        },
-                      ),
+                      _buildSortChip('Low to High', 'price_low', tempSortBy, (
+                        val,
+                      ) {
+                        setModalState(() => tempSortBy = val);
+                      }),
+                      _buildSortChip('High to Low', 'price_high', tempSortBy, (
+                        val,
+                      ) {
+                        setModalState(() => tempSortBy = val);
+                      }),
                       _buildSortChip('Most Popular', 'popular', tempSortBy, (
                         val,
                       ) {
@@ -169,9 +165,7 @@ class _AllCourseTabState extends State<AllCourseTab>
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        setState(
-                          () => _sortBy = tempSortBy,
-                        );
+                        setState(() => _sortBy = tempSortBy);
                         Navigator.pop(context);
                         _fetchCourses();
                       },
@@ -223,7 +217,10 @@ class _AllCourseTabState extends State<AllCourseTab>
         selectedColor: colorScheme.primary,
         checkmarkColor: colorScheme.onPrimary,
         labelStyle: TextStyle(
-          color: isSelected ? colorScheme.onPrimary : colorScheme.onSurface.withOpacity(0.7),
+          color:
+              isSelected
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurface.withOpacity(0.7),
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -236,7 +233,7 @@ class _AllCourseTabState extends State<AllCourseTab>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Scaffold(
       backgroundColor: colorScheme.background,
       body: FadeTransition(
@@ -312,25 +309,28 @@ class _AllCourseTabState extends State<AllCourseTab>
                       style: TextStyle(color: colorScheme.onSurface),
                       decoration: InputDecoration(
                         hintText: 'Search your ideal course...',
-                        hintStyle: TextStyle(color: theme.textTheme.bodyMedium?.color),
+                        hintStyle: TextStyle(
+                          color: theme.textTheme.bodyMedium?.color,
+                        ),
                         prefixIcon: Icon(
                           Icons.search,
                           color: theme.textTheme.bodyMedium?.color,
                         ),
-                        suffixIcon: _searchQuery.isNotEmpty
-                            ? IconButton(
-                                icon: Icon(
-                                  Icons.clear,
-                                  color: theme.textTheme.bodyMedium?.color,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _searchQuery = '';
-                                    _fetchCourses();
-                                  });
-                                },
-                              )
-                            : null,
+                        suffixIcon:
+                            _searchQuery.isNotEmpty
+                                ? IconButton(
+                                  icon: Icon(
+                                    Icons.clear,
+                                    color: theme.textTheme.bodyMedium?.color,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _searchQuery = '';
+                                      _fetchCourses();
+                                    });
+                                  },
+                                )
+                                : null,
                         filled: true,
                         fillColor: colorScheme.surface,
                         contentPadding: const EdgeInsets.symmetric(
@@ -385,9 +385,7 @@ class _AllCourseTabState extends State<AllCourseTab>
                                   const SizedBox(width: 8),
                                   ...categories.map(
                                     (category) => Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: 8,
-                                      ),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: _buildCategoryChip(
                                         category['name'],
                                         category['id'],
@@ -493,7 +491,9 @@ class _AllCourseTabState extends State<AllCourseTab>
                           const SizedBox(height: 8),
                           Text(
                             'Error: ${snapshot.error}',
-                            style: TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withOpacity(0.6),
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -520,7 +520,9 @@ class _AllCourseTabState extends State<AllCourseTab>
                           const SizedBox(height: 8),
                           Text(
                             'Coba ubah kata kunci pencarian atau filter',
-                            style: TextStyle(color: colorScheme.onSurface.withOpacity(0.5)),
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withOpacity(0.5),
+                            ),
                           ),
                         ],
                       ),
@@ -544,15 +546,11 @@ class _AllCourseTabState extends State<AllCourseTab>
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isSelected = _selectedCategory == categoryId;
-    
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       child: FilterChip(
-        label: Text(
-          text,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
+        label: Text(text, maxLines: 1, overflow: TextOverflow.ellipsis),
         selected: isSelected,
         showCheckmark: false,
         onSelected: (selected) {
@@ -565,9 +563,10 @@ class _AllCourseTabState extends State<AllCourseTab>
         selectedColor: colorScheme.primary,
         checkmarkColor: colorScheme.onPrimary,
         labelStyle: TextStyle(
-          color: isSelected 
-              ? colorScheme.onPrimary 
-              : colorScheme.onSurface.withOpacity(0.7),
+          color:
+              isSelected
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurface.withOpacity(0.7),
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -592,7 +591,7 @@ class _AllCourseTabState extends State<AllCourseTab>
       padding: const EdgeInsets.all(16.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.65, // Adjusted for better text space
+        childAspectRatio: 0.65,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),
@@ -608,7 +607,7 @@ class _AllCourseTabState extends State<AllCourseTab>
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
-    
+
     return AnimatedContainer(
       duration: Duration(milliseconds: 300 + (index * 100)),
       child: GestureDetector(
@@ -653,7 +652,10 @@ class _AllCourseTabState extends State<AllCourseTab>
                                     height: 100,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                      color: isDark ? Colors.grey[800] : Colors.grey[200],
+                                      color:
+                                          isDark
+                                              ? Colors.grey[800]
+                                              : Colors.grey[200],
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: Center(
@@ -668,12 +670,18 @@ class _AllCourseTabState extends State<AllCourseTab>
                                     height: 100,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                      color: isDark ? Colors.grey[800] : Colors.grey[200],
+                                      color:
+                                          isDark
+                                              ? Colors.grey[800]
+                                              : Colors.grey[200],
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: Icon(
                                       Icons.broken_image,
-                                      color: isDark ? Colors.grey[600] : Colors.grey[400],
+                                      color:
+                                          isDark
+                                              ? Colors.grey[600]
+                                              : Colors.grey[400],
                                       size: 32,
                                     ),
                                   ),
@@ -683,9 +691,16 @@ class _AllCourseTabState extends State<AllCourseTab>
                               width: 100,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: isDark
-                                      ? [const Color(0xFF2D3748), const Color(0xFF4A5568)]
-                                      : [colorScheme.primary, const Color(0xFF4a5394)],
+                                  colors:
+                                      isDark
+                                          ? [
+                                            const Color(0xFF2D3748),
+                                            const Color(0xFF4A5568),
+                                          ]
+                                          : [
+                                            colorScheme.primary,
+                                            const Color(0xFF4a5394),
+                                          ],
                                 ),
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -728,21 +743,21 @@ class _AllCourseTabState extends State<AllCourseTab>
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 12,
-                                vertical: 8,
+                                vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: colorScheme.secondaryContainer,
+                                color: Colors.green[50],
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
-                                'Rp ${_formatPrice(course['price'])}',
+                                'Rp ${_formatPrice(course['price'] ?? '0')}',
                                 style: TextStyle(
-                                  color: colorScheme.onSecondaryContainer,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 13,
+                                  color: Colors.green[700],
                                 ),
-                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
+                                softWrap: false,
                               ),
                             ),
                           ),
@@ -757,7 +772,7 @@ class _AllCourseTabState extends State<AllCourseTab>
                                 ),
                                 decoration: BoxDecoration(
                                   color: colorScheme.primaryContainer,
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
                                   course['category_course']['name'],
@@ -788,7 +803,7 @@ class _AllCourseTabState extends State<AllCourseTab>
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
-    
+
     return AnimatedContainer(
       duration: Duration(milliseconds: 300 + (index * 50)),
       child: GestureDetector(
@@ -830,7 +845,10 @@ class _AllCourseTabState extends State<AllCourseTab>
                               fit: BoxFit.cover,
                               placeholder:
                                   (context, url) => Container(
-                                    color: isDark ? Colors.grey[800] : Colors.grey[200],
+                                    color:
+                                        isDark
+                                            ? Colors.grey[800]
+                                            : Colors.grey[200],
                                     child: Center(
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
@@ -840,10 +858,16 @@ class _AllCourseTabState extends State<AllCourseTab>
                                   ),
                               errorWidget:
                                   (context, url, error) => Container(
-                                    color: isDark ? Colors.grey[800] : Colors.grey[200],
+                                    color:
+                                        isDark
+                                            ? Colors.grey[800]
+                                            : Colors.grey[200],
                                     child: Icon(
                                       Icons.broken_image,
-                                      color: isDark ? Colors.grey[600] : Colors.grey[400],
+                                      color:
+                                          isDark
+                                              ? Colors.grey[600]
+                                              : Colors.grey[400],
                                       size: 32,
                                     ),
                                   ),
@@ -852,9 +876,16 @@ class _AllCourseTabState extends State<AllCourseTab>
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: isDark
-                                      ? [const Color(0xFF2D3748), const Color(0xFF4A5568)]
-                                      : [colorScheme.primary, const Color(0xFF4a5394)],
+                                  colors:
+                                      isDark
+                                          ? [
+                                            const Color(0xFF2D3748),
+                                            const Color(0xFF4A5568),
+                                          ]
+                                          : [
+                                            colorScheme.primary,
+                                            const Color(0xFF4a5394),
+                                          ],
                                 ),
                               ),
                               child: Icon(
@@ -866,75 +897,68 @@ class _AllCourseTabState extends State<AllCourseTab>
                   ),
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          course['title'] ?? 'No Title',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.onSurface,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+              const SizedBox(height: 8),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 8.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      course['title'],
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green[50],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        'Rp ${_formatPrice(course['price'] ?? '0')}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green[700],
                         ),
                       ),
-                      const SizedBox(height: 8),
+                    ),
+                    const SizedBox(height: 6), // jarak antara harga & kategori
+                    if (course['category_course'] != null &&
+                        course['category_course']['name'] != null)
                       Container(
-                        width: double.infinity,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
+                          horizontal: 8,
+                          vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: colorScheme.secondaryContainer.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(8),
+                          color: colorScheme.primaryContainer,
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          'Rp ${_formatPrice(course['price'])}',
+                          course['category_course']['name'],
                           style: TextStyle(
-                            color: colorScheme.onSecondaryContainer,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                            color: colorScheme.onPrimaryContainer,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
                           ),
-                          textAlign: TextAlign.center,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(height: 6),
-                      if (course['category_course'] != null &&
-                          course['category_course']['name'] != null)
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 3,
-                          ),
-                          decoration: BoxDecoration(
-                            color: colorScheme.primaryContainer,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            course['category_course']['name'],
-                            style: TextStyle(
-                              color: colorScheme.onPrimaryContainer,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
             ],

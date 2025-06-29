@@ -194,7 +194,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 sliderButtonYOffset: -2,
                 submittedIcon: const Icon(
                   Icons.check,
-                  color: Color(0xFF6B73FF),
+                  color: Colors.white,
                   size: 24,
                 ),
                 text: 'Slide to Start Learning',

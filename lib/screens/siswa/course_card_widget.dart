@@ -84,13 +84,13 @@ class CourseCard extends ConsumerWidget {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: colorScheme.shadow.withOpacity(0.3), 
-                            blurRadius: 4
+                            color: colorScheme.shadow.withOpacity(0.3),
+                            blurRadius: 4,
                           ),
                         ],
                       ),
                       child: Icon(
-                        Icons.favorite_border, 
+                        Icons.favorite_border,
                         size: 18,
                         color: colorScheme.onSurface.withOpacity(0.6),
                       ),
@@ -133,7 +133,8 @@ class CourseCard extends ConsumerWidget {
                                       } else {
                                         return Icon(
                                           Icons.star_border,
-                                          color: colorScheme.onSurface.withOpacity(0.4),
+                                          color: colorScheme.onSurface
+                                              .withOpacity(0.4),
                                           size: 16,
                                         );
                                       }
@@ -156,7 +157,8 @@ class CourseCard extends ConsumerWidget {
                                       5,
                                       (index) => Icon(
                                         Icons.star_border,
-                                        color: colorScheme.onSurface.withOpacity(0.3),
+                                        color: colorScheme.onSurface
+                                            .withOpacity(0.3),
                                         size: 16,
                                       ),
                                     ),
@@ -178,7 +180,8 @@ class CourseCard extends ConsumerWidget {
                                       5,
                                       (index) => Icon(
                                         Icons.star_border,
-                                        color: colorScheme.onSurface.withOpacity(0.4),
+                                        color: colorScheme.onSurface
+                                            .withOpacity(0.4),
                                         size: 16,
                                       ),
                                     ),
@@ -214,13 +217,14 @@ class CourseCard extends ConsumerWidget {
                                 color: colorScheme.primary,
                               ),
                             ),
-                        error: (_, __) => Text(
-                          '0 lessons',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: colorScheme.onSurface.withOpacity(0.6),
-                          ),
-                        ),
+                        error:
+                            (_, __) => Text(
+                              '0 lessons',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: colorScheme.onSurface.withOpacity(0.6),
+                              ),
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -241,15 +245,15 @@ class CourseCard extends ConsumerWidget {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: colorScheme.secondaryContainer,
-                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.green[50],
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
-                              'Rp ${_formatPrice(course['price'])}',
+                              'Rp ${_formatPrice(course['price'] ?? '0')}',
                               style: TextStyle(
-                                color: colorScheme.onSecondaryContainer,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 14,
+                                color: Colors.green[700],
                               ),
                             ),
                           ),

@@ -163,35 +163,35 @@ class _HomeTabState extends State<HomeTab> {
             ],
           ),
           Row(
-          children: [
-            // 🌙 Theme toggle (tanpa container)
-            IconButton(
-              icon: Icon(
-                isDark ? Icons.light_mode : Icons.dark_mode,
-                color: Colors.white,
-                size: 24,
+            children: [
+              // 🌙 Theme toggle (tanpa container)
+              IconButton(
+                icon: Icon(
+                  isDark ? Icons.light_mode : Icons.dark_mode,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                onPressed: () {
+                  container.read(themeModeProvider.notifier).state =
+                      isDark ? ThemeMode.light : ThemeMode.dark;
+                },
               ),
-              onPressed: () {
-                container.read(themeModeProvider.notifier).state =
-                    isDark ? ThemeMode.light : ThemeMode.dark;
-              },
-            ),
-            const SizedBox(width: 8),
-            // 🔔 Notifikasi
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
+              const SizedBox(width: 8),
+              // 🔔 Notifikasi
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.notifications_outlined,
+                  color: Colors.white,
+                  size: 24,
+                ),
               ),
-              child: const Icon(
-                Icons.notifications_outlined,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
         ],
       ),
     );
@@ -200,7 +200,7 @@ class _HomeTabState extends State<HomeTab> {
   Widget _buildSearchBar() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -229,11 +229,16 @@ class _HomeTabState extends State<HomeTab> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.search, color: colorScheme.onSurface.withOpacity(0.6)),
+                    Icon(
+                      Icons.search,
+                      color: colorScheme.onSurface.withOpacity(0.6),
+                    ),
                     const SizedBox(width: 8),
                     Text(
-                      'Search now...', 
-                      style: TextStyle(color: colorScheme.onSurface.withOpacity(0.6))
+                      'Search now...',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withOpacity(0.6),
+                      ),
                     ),
                   ],
                 ),
@@ -266,13 +271,13 @@ class _HomeTabState extends State<HomeTab> {
   Widget _buildCategoryTabs() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     final colors = [
-      colorScheme.primaryContainer.withOpacity(0.3),
-      colorScheme.secondaryContainer.withOpacity(0.3),
-      colorScheme.tertiaryContainer.withOpacity(0.3),
-      colorScheme.errorContainer.withOpacity(0.3),
-      colorScheme.surfaceContainerHighest.withOpacity(0.3),
+      const Color(0xFF7D8AFF), // AI - Soft Indigo
+      const Color(0xFFFFDA7A), // Math - Soft Amber
+      const Color(0xFFD9A7FF), // Tech - Lavender Magenta
+      const Color(0xFFA8E6CF), 
+      const Color(0xFFCABBE9), 
     ];
 
     if (_isLoadingCategories) {
@@ -329,7 +334,7 @@ class _HomeTabState extends State<HomeTab> {
   Widget _buildRecommendedCoursesSection() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Padding(
       padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20),
       child: Column(
@@ -375,7 +380,7 @@ class _HomeTabState extends State<HomeTab> {
   Widget _buildPopularCoursesSection() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Padding(
       padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20),
       child: Column(
@@ -424,14 +429,16 @@ class _HomeTabState extends State<HomeTab> {
   ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return FutureBuilder<Map<String, List<dynamic>>>(
       future: coursesFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Center(child: CircularProgressIndicator(color: colorScheme.primary)),
+            child: Center(
+              child: CircularProgressIndicator(color: colorScheme.primary),
+            ),
           );
         }
 
